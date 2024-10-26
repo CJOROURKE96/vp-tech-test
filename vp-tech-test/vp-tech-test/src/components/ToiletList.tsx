@@ -35,16 +35,23 @@ const ToiletList: React.FC = () => {
               padding: '10px',
             }}
           >
-            <img
-              src={toilet.image.url}
-              alt={toilet.productName}
-              style={{ width: '200px', height: 'auto' }}
-            />
-            <img
-              src={toilet.brand.brandImage.url}
-              alt={toilet.brand.name}
-              style={{ width: '100px', height: 'auto' }}
-            />
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <img
+                src={toilet.image.url}
+                alt={toilet.productName}
+                style={{ width: '200px', height: 'auto' }}
+              />
+              <img
+                src={toilet.brand.brandImage.url}
+                alt={toilet.brand.name}
+                style={{ width: '100px', height: 'auto' }}
+              />
+            </div>
             <h2>{toilet.productName}</h2>
             <p>£{toilet.price.priceIncTax}</p>
             <div className="inline-reviews">
