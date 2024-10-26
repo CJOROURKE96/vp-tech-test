@@ -25,7 +25,7 @@ const ToiletList: React.FC = () => {
   return (
     <div>
       <h1>Toilets</h1>
-      <ul>
+      <ul style={{ listStyleType: 'none' }}>
         {toilets.map((toilet) => (
           <li
             key={toilet.id}
