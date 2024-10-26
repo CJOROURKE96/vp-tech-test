@@ -26,14 +26,24 @@ const ToiletList: React.FC = () => {
   return (
     <div>
       <h1>Toilets</h1>
-      <ul style={{ listStyleType: 'none' }}>
+      <ul
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'flex-start',
+          margin: '0 -10px',
+          listStyleType: 'none',
+        }}
+      >
         {toilets.map((toilet) => (
           <li
             key={toilet.id}
             style={{
-              marginBottom: '20px',
+              margin: '10px',
               border: '1px solid #ddd',
               padding: '10px',
+              width: 'calc(33.333% - 20px)',
+              boxSizing: 'border-box',
             }}
           >
             <div
