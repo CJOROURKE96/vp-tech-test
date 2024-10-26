@@ -20,6 +20,7 @@ export interface ToiletItem {
     };
   };
   averageRating: number;
+  reviewsCount: number;
 }
 
 export const fetchToilets = async (): Promise<ToiletItem[]> => {
