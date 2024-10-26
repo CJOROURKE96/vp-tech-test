@@ -40,6 +40,7 @@ const ToiletList: React.FC = () => {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
+                gap: '4px',
               }}
             >
               <img
@@ -54,7 +55,7 @@ const ToiletList: React.FC = () => {
               />
             </div>
             <h2>{toilet.productName}</h2>
-            <PriceDisplay price={toilet.price}/>
+            <PriceDisplay price={toilet.price} />
             <div className="inline-reviews">
               <StarRating rating={toilet.averageRating} />{' '}
               <p>{toilet.reviewsCount}</p>
