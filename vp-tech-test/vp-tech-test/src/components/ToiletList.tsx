@@ -56,7 +56,7 @@ const ToiletList: React.FC = () => {
               <img
                 src={toilet.image.url}
                 alt={toilet.productName}
-                style={{ width: '200px', height: 'auto' }}
+                style={{ objectFit: 'cover' }}
               />
               <img
                 src={toilet.brand.brandImage.url}
