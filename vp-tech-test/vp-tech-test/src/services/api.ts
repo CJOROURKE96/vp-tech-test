@@ -9,6 +9,9 @@ export interface ToiletItem {
   productName: string;
   price: {
     priceIncTax: number;
+    currencyCode: string;
+    isOnPromotion: boolean;
+    wasPriceIncTax: number;
   };
   image: {
     url: string;
