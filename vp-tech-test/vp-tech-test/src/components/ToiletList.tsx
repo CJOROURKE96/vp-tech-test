@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchToilets, ToiletItem } from '../services/api';
 import StarRating from './StarRating';
+import '../styles/toiletList.css';
 
 const ToiletList: React.FC = () => {
   const [toilets, setToilets] = useState<ToiletItem[]>([]);
@@ -46,7 +47,10 @@ const ToiletList: React.FC = () => {
             />
             <h2>{toilet.productName}</h2>
             <p>£{toilet.price.priceIncTax}</p>
-            <StarRating rating={toilet.averageRating} />
+            <div className="inline-reviews">
+              <StarRating rating={toilet.averageRating} />{' '}
+              <p>{toilet.reviewsCount}</p>
+            </div>
           </li>
         ))}
       </ul>
