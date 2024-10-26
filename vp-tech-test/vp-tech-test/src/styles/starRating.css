@@ -1,0 +1,30 @@
+.star-rating {
+  color: gold;
+  display: inline-flex;
+  font-size: 1.5rem;
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.half {
+  color: gold;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 0.5em; /* Half of the star */
+}
+
+.star.half::before {
+  content: '★';
+  color: gold;
+  position: absolute;
+  left: 0;
+  width: 0.5em;
+  overflow: hidden;
+}
+
+.star.empty {
+  color: lightgray;
+}

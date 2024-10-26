@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchToilets, ToiletItem } from '../services/api';
+import StarRating from './StarRating';
 
 const ToiletList: React.FC = () => {
   const [toilets, setToilets] = useState<ToiletItem[]>([]);
@@ -45,7 +46,7 @@ const ToiletList: React.FC = () => {
             />
             <h2>{toilet.productName}</h2>
             <p>£{toilet.price.priceIncTax}</p>
-            <p>{toilet.averageRating} / 5</p>
+            <StarRating rating={toilet.averageRating} />
           </li>
         ))}
       </ul>
