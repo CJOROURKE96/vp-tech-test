@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Accordion from './Accordion';
 import { ToiletItem } from '../services/api';
 
 interface StyleFilterProps {
   onStyleChange: (selectedStyles: string[]) => void;
+  toilets: ToiletItem[];
 }
 
 const PRODUCT_STYLES = [
@@ -12,8 +13,24 @@ const PRODUCT_STYLES = [
   { label: 'Accessible', value: 'Accessible Toilets' },
 ];
 
-const StyleFilter: React.FC<StyleFilterProps> = ({ onStyleChange }) => {
+const StyleFilter: React.FC<StyleFilterProps> = ({
+  onStyleChange,
+  toilets,
+}) => {
   const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
+  const [stylesWithCounts, setStylesWithCounts] = useState<
+    { label: string; value: string; count: number }[]
+  >([]);
+
+  useEffect(() => {
+    const updatedStyles = PRODUCT_STYLES.map((style) => {
+      const count = toilets.filter(
+        (toilet) => toilet.defaultCategory.name === style.value
+      ).length; // Assuming 'style' is a property in ToiletItem
+      return { ...style, count };
+    });
+    setStylesWithCounts(updatedStyles);
+  }, [toilets]); // Update counts whenever toilets change
 
   // Handle checkbox selection
   const handleCheckboxChange = (style: string) => {
@@ -27,7 +44,7 @@ const StyleFilter: React.FC<StyleFilterProps> = ({ onStyleChange }) => {
   return (
     <div style={{ border: '1px solid #ddd', padding: '10px', width: '200px' }}>
       <Accordion title="Style">
-        {PRODUCT_STYLES.map((style) => (
+        {stylesWithCounts.map((style) => (
           <label
             key={style.value}
             style={{
@@ -42,7 +59,10 @@ const StyleFilter: React.FC<StyleFilterProps> = ({ onStyleChange }) => {
               onChange={() => handleCheckboxChange(style.value)}
               style={{ marginRight: '8px' }}
             />
-            {style.label}
+            {style.label}{' '}
+            <span style={{ marginLeft: '4px', color: '#888' }}>
+              ({style.count})
+            </span>
           </label>
         ))}
       </Accordion>
