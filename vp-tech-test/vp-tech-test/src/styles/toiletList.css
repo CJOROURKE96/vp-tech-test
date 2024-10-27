@@ -7,3 +7,9 @@
 .toilet-item h3 {
   margin-bottom: 4px;
 }
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
