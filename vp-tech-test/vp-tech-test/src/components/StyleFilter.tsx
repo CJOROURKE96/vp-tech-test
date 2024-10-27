@@ -5,6 +5,7 @@ import { ToiletItem } from '../services/api';
 interface StyleFilterProps {
   onStyleChange: (selectedStyles: string[]) => void;
   toilets: ToiletItem[];
+  selectedPriceRange: { min: number; max: number } | null;
 }
 
 const PRODUCT_STYLES = [
@@ -16,6 +17,7 @@ const PRODUCT_STYLES = [
 const StyleFilter: React.FC<StyleFilterProps> = ({
   onStyleChange,
   toilets,
+  selectedPriceRange,
 }) => {
   const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
   const [stylesWithCounts, setStylesWithCounts] = useState<
@@ -24,13 +26,17 @@ const StyleFilter: React.FC<StyleFilterProps> = ({
 
   useEffect(() => {
     const updatedStyles = PRODUCT_STYLES.map((style) => {
-      const count = toilets.filter(
-        (toilet) => toilet.defaultCategory.name === style.value
-      ).length; // Assuming 'style' is a property in ToiletItem
+      const count = toilets.filter((toilet) => {
+        const withinPriceRange =
+          !selectedPriceRange || // Check if there's no price range selected
+          (toilet.price.priceIncTax >= selectedPriceRange.min &&
+            toilet.price.priceIncTax < selectedPriceRange.max);
+        return toilet.defaultCategory.name === style.value && withinPriceRange; // Filter by style and price range
+      }).length;
       return { ...style, count };
     });
     setStylesWithCounts(updatedStyles);
-  }, [toilets]); // Update counts whenever toilets change
+  }, [toilets, selectedPriceRange]); // Recalculate counts when toilets or price range change
 
   // Handle checkbox selection
   const handleCheckboxChange = (style: string) => {
