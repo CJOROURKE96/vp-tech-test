@@ -65,7 +65,7 @@ const ToiletList: React.FC = () => {
       <h1>Filter By</h1>
       <div style={{ display: 'flex' }}>
         <div className="filter-container">
-          <PriceFilter onFilterChange={setSelectedRange} toilets={toilets} />
+          <PriceFilter onFilterChange={setSelectedRange} toilets={toilets} selectedStyles={selectedStyles}/>
           <StyleFilter onStyleChange={handleStyleChange} toilets={toilets} selectedPriceRange={selectedRange}/>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}></div>
         </div>
