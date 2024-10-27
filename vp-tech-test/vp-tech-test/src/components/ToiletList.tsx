@@ -65,46 +65,47 @@ const ToiletList: React.FC = () => {
       <h1>Filter By</h1>
       <div style={{ display: 'flex' }}>
         <div className="filter-container">
-          <PriceFilter onFilterChange={setSelectedRange} toilets={toilets} selectedStyles={selectedStyles}/>
-          <StyleFilter onStyleChange={handleStyleChange} toilets={toilets} selectedPriceRange={selectedRange}/>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}></div>
+          <PriceFilter
+            onFilterChange={setSelectedRange}
+            toilets={toilets}
+            selectedStyles={selectedStyles}
+          />
+          <StyleFilter
+            onStyleChange={handleStyleChange}
+            toilets={toilets}
+            selectedPriceRange={selectedRange}
+          />
         </div>
-        {filteredToilets.map((toilet) => (
-          <div
-            key={toilet.id}
-            style={{
-              border: '1px solid #ddd',
-              padding: '10px',
-              width: 'calc(33.333% - 20px)',
-              boxSizing: 'border-box',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '4px',
-              }}
-            >
-              <img
-                src={toilet.image.url}
-                alt={toilet.productName}
-                style={{ objectFit: 'cover' }}
-              />
-              <img
-                src={toilet.brand.brandImage.url}
-                alt={toilet.brand.name}
-                style={{ width: '100px', height: 'auto' }}
-              />
+        <div className="product-container">
+          {filteredToilets.map((toilet) => (
+            <div key={toilet.id} className="product-item">
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px',
+                }}
+              >
+                <img
+                  src={toilet.image.url}
+                  alt={toilet.productName}
+                  style={{ objectFit: 'cover' }}
+                />
+                <img
+                  src={toilet.brand.brandImage.url}
+                  alt={toilet.brand.name}
+                  style={{ width: '100px', height: 'auto' }}
+                />
+              </div>
+              <h2>{toilet.productName}</h2>
+              <PriceDisplay price={toilet.price} />
+              <div className="inline-reviews">
+                <StarRating rating={toilet.averageRating} />{' '}
+                <p>{toilet.reviewsCount}</p>
+              </div>
             </div>
-            <h2>{toilet.productName}</h2>
-            <PriceDisplay price={toilet.price} />
-            <div className="inline-reviews">
-              <StarRating rating={toilet.averageRating} />{' '}
-              <p>{toilet.reviewsCount}</p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
