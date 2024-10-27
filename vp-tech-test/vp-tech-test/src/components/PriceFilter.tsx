@@ -35,7 +35,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
   const [priceRangesWithCounts, setPriceRangesWithCounts] = useState<
     PriceRange[]
   >([]);
-  const [showAll, setShowAll] = useState<boolean>(false); // State to toggle visibility
+  const [showAll, setShowAll] = useState<boolean>(false);
 
   useEffect(() => {
     const updatedRanges = PRICE_RANGES.map((range) => {
@@ -51,14 +51,21 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
 
   // Handle checkbox selection
   const handleCheckboxChange = (range: PriceRange) => {
-    if (!selectedRange) {
-      setSelectedRange(range);
+    // Check if the selected range is the same as the clicked range
+    const isSameRange = selectedRange === range;
+
+    // Update the selected range
+    setSelectedRange(isSameRange ? null : range);
+
+    // Update min and max prices based on the selection
+    if (isSameRange) {
       setMinPrice('');
       setMaxPrice('');
-      onFilterChange(range);
-    } else {
-      setSelectedRange(null);
       onFilterChange(null);
+    } else {
+      setMinPrice('');
+      setMaxPrice('');
+      onFilterChange(range); // Apply the new selected range
     }
   };
 
