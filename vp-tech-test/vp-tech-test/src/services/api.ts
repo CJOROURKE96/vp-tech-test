@@ -22,6 +22,9 @@ export interface ToiletItem {
       url: string;
     };
   };
+  defaultCategory: {
+    name: string;
+  };
   averageRating: number;
   reviewsCount: number;
 }
