@@ -13,7 +13,9 @@ const ToiletList: React.FC = () => {
     min: number;
     max: number;
   } | null>(null);
-  const [styleFilteredToilets, setStyleFilteredToilets] = useState<ToiletItem[]>([]);
+  const [styleFilteredToilets, setStyleFilteredToilets] = useState<
+    ToiletItem[]
+  >([]);
   const [selectedStyles, setSelectedStyles] = useState<string[]>([]);
 
   useEffect(() => {
@@ -64,7 +66,7 @@ const ToiletList: React.FC = () => {
       <div style={{ display: 'flex' }}>
         <div className="filter-container">
           <PriceFilter onFilterChange={setSelectedRange} toilets={toilets} />
-          <StyleFilter onStyleChange={handleStyleChange} />
+          <StyleFilter onStyleChange={handleStyleChange} toilets={toilets} />
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}></div>
         </div>
         {filteredToilets.map((toilet) => (
