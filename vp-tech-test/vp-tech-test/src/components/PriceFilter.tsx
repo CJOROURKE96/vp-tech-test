@@ -72,7 +72,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
   // Handle custom range submission
   const handleCustomRangeSubmit = () => {
     const min = minPrice ? parseFloat(minPrice) : 0; // Default min to 0 if empty
-    const max = parseFloat(maxPrice);
+    const max = maxPrice ? parseFloat(maxPrice) : 1000; // Default max to 1000 if empty
 
     if (!isNaN(max) && min <= max) {
       setSelectedRange(null); // Deselect any pre-set range
