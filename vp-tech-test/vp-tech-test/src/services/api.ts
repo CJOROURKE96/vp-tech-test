@@ -38,7 +38,5 @@ export const fetchToilets = async (): Promise<ToiletItem[]> => {
     sort: 1,
   });
 
-  console.log(response.data.products, '<------------ RESP');
-
   return response.data.products;
 };
