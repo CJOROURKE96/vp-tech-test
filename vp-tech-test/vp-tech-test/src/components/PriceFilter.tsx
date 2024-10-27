@@ -12,6 +12,7 @@ interface PriceRange {
 interface PriceFilterProps {
   onFilterChange: (range: PriceRange | null) => void;
   toilets: ToiletItem[];
+  selectedStyles: string[];
 }
 
 const PRICE_RANGES: Omit<PriceRange, 'count'>[] = [
@@ -28,6 +29,7 @@ const PRICE_RANGES: Omit<PriceRange, 'count'>[] = [
 const PriceFilter: React.FC<PriceFilterProps> = ({
   onFilterChange,
   toilets,
+  selectedStyles,
 }) => {
   const [selectedRange, setSelectedRange] = useState<PriceRange | null>(null);
   const [minPrice, setMinPrice] = useState<string>('');
@@ -39,15 +41,23 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
 
   useEffect(() => {
     const updatedRanges = PRICE_RANGES.map((range) => {
-      const count = toilets.filter(
-        (toilet) =>
+      const count = toilets.filter((toilet) => {
+        const withinPriceRange =
           toilet.price.priceIncTax >= range.min &&
-          toilet.price.priceIncTax < range.max
-      ).length;
+          toilet.price.priceIncTax < range.max;
+
+        // Check if the toilet matches any of the selected styles
+        const matchesSelectedStyles =
+          selectedStyles.length === 0 || // If no styles are selected, count all
+          selectedStyles.includes(toilet.defaultCategory.name); // Assuming 'style' is a property in ToiletItem
+
+        return withinPriceRange && matchesSelectedStyles; // Filter by both criteria
+      }).length;
+
       return { ...range, count };
     });
     setPriceRangesWithCounts(updatedRanges);
-  }, [toilets]);
+  }, [toilets, selectedStyles]); // Recalculate counts when toilets or selected styles change
 
   // Handle checkbox selection
   const handleCheckboxChange = (range: PriceRange) => {
