@@ -10,3 +10,5 @@ To set up and run the frontend development server:
 
 ```bash
 npm run dev
+
+This command launches the application in development mode. Open your browser and navigate to the specified local server (usually http://localhost:3000) to view and interact with the application.
