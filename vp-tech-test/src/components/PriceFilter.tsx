@@ -49,7 +49,7 @@ const PriceFilter: React.FC<PriceFilterProps> = ({
         // Check if the toilet matches any of the selected styles
         const matchesSelectedStyles =
           selectedStyles.length === 0 || // If no styles are selected, count all
-          selectedStyles.includes(toilet.defaultCategory.name); // Assuming 'style' is a property in ToiletItem
+          selectedStyles.includes(toilet.defaultCategory.name);
 
         return withinPriceRange && matchesSelectedStyles; // Filter by both criteria
       }).length;
